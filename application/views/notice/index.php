@@ -23,32 +23,36 @@
                                     <thead>
                                         <tr>
                                             <th>SL</th>
-                                            <th>Name</th>
-                                            <th>Designation</th>
-                                            <th>Department</th>
+                                            <th>Notice Category</th>
+                                            <th>Title</th>
+                                            <th>Hints</th>
+                                            <th>Notice Date</th>
                                             <th>Action</th>
+
                                             
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>SL</th>
-                                            <th>Name</th>
-                                            <th>Designation</th>
-                                            <th>Department</th>
+                                            <th>Notice Category</th>
+                                            <th>Title</th>
+                                            <th>Hints</th>
+                                            <th>Notice Date</th>
                                             <th>Action</th>
                                            
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <?php $i = 0;foreach($users as $val){ $i++;?>
+                                        <?php $i = 0;foreach($allNotices as $val){ $i++;?>
                                         <tr>
                                             <td><?= $i;?></td>
-                                            <td><?= $val['name'];?></td>
-                                            <td><?= $val['dtitle'];?></td>
-                                            <td><?= $val['desiTitle'];?></td>
+                                            <td><?= $val['noticeCategoryTitle'];?></td>
+                                            <td><?= $val['title'];?></td>
+                                            <td><?= $val['hints'];?></td>
+                                            <td><?= $val['notice_date'];?></td>
                                             <td>
-                                                <span><a href="" class="btn btn-primary btn-xs"><i class="material-icons">create</i></a></span>
+                                                <span><a href="<?= base_url()."NoticeController/edit/".$val['id'];?>" class="btn btn-primary btn-xs"><i class="material-icons">create</i></a></span>
                                                 <span><a href="" class="btn btn-danger btn-xs"><i class="material-icons">delete</i></a></span>
                                             </td>
                                         </tr>
