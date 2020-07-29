@@ -6,6 +6,8 @@
 </div>
 <div class="clear"></div><br>
 
+<input type="hidden" name="" id = "baseUrl" value="<?= base_url();?>">
+
 
 <!-- Exportable Table -->
             <div class="row clearfix">
@@ -52,16 +54,16 @@
                                             <td><?= $val['hints'];?></td>
                                             <td><?= $val['notice_date'];?></td>
                                             <td>
-                                                <span><a href="<?= base_url()."NoticeController/edit/".$val['id'];?>" class="btn btn-primary btn-xs"><i class="material-icons">create</i></a></span>
-                                                <span><a href="" class="btn btn-danger btn-xs"><i class="material-icons">delete</i></a></span>
+                                                <span><a href="<?= base_url()."NoticeController/edit/".$val['id'];?>" class="btn btn-primary btn-xs" title = "Edit"><i class="material-icons">create</i></a></span>
+                                                <span><a href="<?= base_url()."NoticeController/view/".$val['id'];?>" class="btn btn-success btn-xs" title = 
+                                                    "Details View"><i class="material-icons">view_agenda</i></a></span>
+                                                <span>
+                                                    <button type="button" name="" id = "<?= $val['id'];?>" class = "btn btn-danger btn-xs remove"><i class="material-icons">delete</i>
+                                                   </button>
                                             </td>
                                         </tr>
                                     <?php }?>
-                                        
-                                        
-                                        
-                                        
-                                        
+
                                     </tbody>
                                 </table>
                             </div>
@@ -69,3 +71,80 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+<script>
+    $(document).ready(function(){
+        $(".remove").click(function(){
+            var base_url = $('#baseUrl').val();
+            var id = $(this).attr("id");
+    
+
+       swal({
+
+        title: "Are you sure?",
+
+        text: "You will not be able to recover this imaginary file!",
+
+        type: "warning",
+
+        showCancelButton: true,
+
+        confirmButtonClass: "btn-danger",
+
+        confirmButtonText: "Yes, delete it!",
+
+        cancelButtonText: "No, cancel plx!",
+
+        closeOnConfirm: false,
+
+        closeOnCancel: false
+
+      },
+
+      function(isConfirm) {
+
+        if (isConfirm) {
+
+          $.ajax({
+
+             url: base_url+'NoticeController/delete/'+id,
+
+             type: 'DELETE',
+
+             error: function() {
+
+                alert('Something is wrong');
+
+             },
+
+             success: function(data) {
+
+                 // $("#"+id).remove();
+
+                  swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                  location.reload();
+
+             }
+
+          });
+
+        } else {
+
+          swal("Cancelled", "Your imaginary file is safe :)", "error");
+
+        }
+
+      });
+
+     
+
+    });
+
+    
+
+    });
+</script>

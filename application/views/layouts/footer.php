@@ -2,8 +2,8 @@
         </div>
     </section>
 
-    <!-- Jquery Core Js -->
-    <script src="<?php echo base_url("resources/plugins/jquery/jquery.min.js");?>"></script>
+    
+    
 
     <!-- Bootstrap Core Js -->
     <script src="<?php echo base_url("resources/plugins/bootstrap/js/bootstrap.js");?>"></script>
@@ -40,6 +40,8 @@
      <!-- Moment Plugin Js -->
   
     <script src="<?php echo base_url("resources/js/pages/tables/jquery-datatable.js");?>"></script>
+    <!-- Sweet alert js -->
+    <script src="<?php echo base_url("resources/js/sweetalert/sweetalert.js");?>"></script>
     <!-- Demo Js -->
     <script src="<?php echo base_url("resources/js/demo.js");?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -66,6 +68,9 @@
 
         <?php } ?>
 
+
+
+        
 
         </script>
 </body>

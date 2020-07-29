@@ -10,6 +10,7 @@ class NoticeController extends My_Controller {
         $this->load->model('department');
         $this->load->model('noticecategory');
         $this->load->model('notice');
+        $this->load->helper('download');
 
     }
      
@@ -89,10 +90,23 @@ class NoticeController extends My_Controller {
 			
 			if(!$_FILES["image"]['name']){
 				$imageName = $this->input->post('hidden_image_name');
+				$noticeDate = date("Y-m-d", strtotime($this->input->post('notice_date')));
+				$formData = array(
+		        			'notice_category_id'=>$this->input->post('notice_category'),
+		        			'title'=>$this->input->post('title'),
+		        			'hints'=>$this->input->post('hints'),
+		        			'notice_date'=>$noticeDate,
+		        			'image'=>$imageName,
+		        			'comments'=>$this->input->post('comments'),
+		        		);
+				$this->notice->update_by_id($noticeId,$formData);
+		        			$this->session->set_flashdata('success','Notice is updated successfully');
+        					redirect(base_url().'NoticeController/index');
+		        
 			}else{
 				$path = FCPATH  . "./resources/images/notices/".$this->input->post('hidden_image_name');
 
-				unlink($path);
+				if($path){unlink($path);}
 					
 					//unlink('./resources/images/notices/'.$this->input->post('hidden_image_name'));
 					$imageName = time().$_FILES["image"]['name'];
@@ -119,12 +133,40 @@ class NoticeController extends My_Controller {
 		        			'image'=>$imageName,
 		        			'comments'=>$this->input->post('comments'),
 		        		);
-		        		if($this->notice->update_by_id($noticeId,$formData)){
+		        		
+		        		$this->notice->update_by_id($noticeId,$formData);
 		        			$this->session->set_flashdata('success','Notice is updated successfully');
         					redirect(base_url().'NoticeController/index');
-		        		}
+		        		
         			}
 				}
 			}
 	}
+
+	public function view($id){
+		$this->data = array();
+		$this->page = 'notice/view';
+		$this->data['notice'] = $this->notice->get_by_id($id);
+		$this->layout();
+	}
+
+	public function delete($id){
+		$this->notice->delete_notice($id);
+	}
+
+	  public function download($fileName = NULL) {   
+	   if ($fileName) {
+	    $file = realpath ( "resources/images/notices" ) . "\\" . $fileName;
+	    // check file exists    
+	    if (file_exists ( $file )) {
+	     // get file content
+	     $data = file_get_contents ( $file );
+	     //force download
+	     force_download ( $fileName, $data );
+	    } else {
+	     // Redirect to base url
+	     redirect ( base_url () );
+	    }
+	   }
+	  }
 }

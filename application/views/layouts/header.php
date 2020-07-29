@@ -36,4 +36,10 @@
     <link href="<?= base_url('resources/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css');?>" rel="stylesheet" />
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url('resources/css/themes/all-themes.css');?>" rel="stylesheet" />
+    
+    <!-- Sweet alert css -->
+     <link href="<?php echo base_url('resources/css/sweetalert/sweetalert.css');?>" rel="stylesheet" />
+
+     <!-- Jquery Core Js -->
+    <script src="<?php echo base_url("resources/plugins/jquery/jquery.min.js");?>"></script>
 </head>
